@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const TARGET_USER_ID = "288740443665989632";
-const TARGET_USER_LOUIS = "504034148852432913";
 const M = "505889750452928513"
 const ONE_WEEK_TIMEOUT = 7 * 24 * 60 * 60 * 1000;
 const LOGCHANNEL = "731972228110876682";
@@ -61,18 +60,8 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  if (message.author.id === (TARGET_USER_LOUIS || TARGET_USER_ID || M)) {
-    try {
-        const arrReaction = ["🖕", "🫴"]
-        for (const reaction of arrReaction) {
-            await message.react(reaction);
-        }
-    } catch (error) {
-        console.log(error);
-    }
-  }
 
-  if (message.author.id === M) {
+  if (message.author.id === (M)) {
     await message.reply("Xiuuuu 🤫")
   }
 
