@@ -25,7 +25,7 @@ client.on("messageCreate", async (message) => {
 
   if (!message.guild) return; 
 
-  if (message.author.id === TARGET_USER_ID) {
+  if (message.author.id === (TARGET_USER_ID || M)) {
     try {
       const botMessage = "Bye bye 🖕";
       await message.reply(botMessage);
@@ -62,7 +62,7 @@ client.on("messageCreate", async (message) => {
 
 
   if (message.author.id === (M)) {
-    await message.reply("Xiuuuu 🤫")
+    await message.reply("Xiuuuu 🤫");
   }
 
 });
