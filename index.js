@@ -25,7 +25,7 @@ client.on("messageCreate", async (message) => {
 
   if (!message.guild) return; 
 
-  if (message.author.id === (TARGET_USER_ID || M)) {
+  if (message.author.id === (TARGET_USER_ID) || message.author.id === M) {
     try {
       const botMessage = "Bye bye 🖕";
       await message.reply(botMessage);
@@ -66,5 +66,24 @@ client.on("messageCreate", async (message) => {
   }
 
 });
+
+client.on("voiceStateUpdate", async (oldState, newState) => {
+  if (newState.member.id === M && newState.channel && !oldState.channel) {
+    try {
+      await newState.setMute(true, `Auto-mute do usuário ${newState.member.user.tag}`);
+      console.log(`${newState.member.user.tag} foi mutado automaticamente ao entrar no canal de voz`);
+
+      const logChannel = newState.guild.channels.cache.get(LOGCHANNEL);
+      if (logChannel) {
+        await logChannel.send(
+          `${newState.member.user.tag} foi mutado automaticamente ao entrar em ${newState.channel.name}`
+        );
+      }
+    } catch (error) {
+      console.log("Erro ao mutar usuário:", error);
+    }
+  }
+});
+
 
 client.login(process.env.TOKEN_DISCORD_BOT);
